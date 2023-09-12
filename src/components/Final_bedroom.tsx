@@ -4,7 +4,7 @@ Command: npx gltfjsx@6.2.13 .\public\models\final_bedroom.glb -t -r public
 */
 
 import * as THREE from 'three'
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import { useFrame } from '@react-three/fiber'
