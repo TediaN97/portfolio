@@ -4,8 +4,8 @@ Command: npx gltfjsx@6.2.13 .\public\models\64fae7c4a9fb106b21a99e71.glb -t -r p
 */
 
 import * as THREE from 'three'
-import { useRef, useEffect, useState } from 'react'
-import { useFBX, useGLTF, useAnimations, PositionPoint } from '@react-three/drei'
+import { useRef, useEffect } from 'react'
+import { useFBX, useGLTF, useAnimations} from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import { useFrame } from '@react-three/fiber'
 
@@ -42,7 +42,6 @@ export function Avatar(props: JSX.IntrinsicElements['group'] & {
   const groupRef = useRef<THREE.Group>(null);
   
   const { nodes, materials } = useGLTF('/models/64fae7c4a9fb106b21a99e71.glb') as GLTFResult
-  const [isTyping, setIsTyping] = useState(false);
 
   const { animations: typingAnimation} = useFBX("animations/Typing.fbx");
   const { animations: standingIdleAnimation} = useFBX("animations/Standing Idle.fbx");
@@ -62,9 +61,6 @@ export function Avatar(props: JSX.IntrinsicElements['group'] & {
 
   useEffect(() => {
     actions[animation]?.reset().fadeIn(0.5).play();
-    if(animation === "Typing"){
-      setIsTyping(true);
-    } else setIsTyping(false);
     return () => {
       actions[animation]?.reset().fadeOut(0.5);
     }

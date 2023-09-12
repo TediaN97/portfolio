@@ -4,7 +4,6 @@ Command: npx gltfjsx@6.2.13 .\public\models\desktop.glb -t -r public
 */
 
 import * as THREE from 'three'
-import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 
@@ -783,8 +782,6 @@ type GLTFResult = GLTF & {
     ['Material.074_14']: THREE.MeshStandardMaterial
   }
 }
-
-type ContextType = Record<string, React.ForwardRefExoticComponent<JSX.IntrinsicElements['mesh']>>
 
 export function Desktop(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/models/desktop.glb') as GLTFResult
