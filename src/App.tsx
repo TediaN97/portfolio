@@ -5,7 +5,7 @@ import { Experience } from './components/Experience'
 function App() {
 
   return (
-      <Canvas shadows camera={{ position: [0, 2, 5], fov: 30 }}>
+      <Canvas shadows camera={{ position: [0, 2, 10], fov: 30 }}>
         <Experience /> 
       </Canvas>
   )
