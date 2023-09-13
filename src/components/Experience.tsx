@@ -1,4 +1,4 @@
-import { Environment, OrbitControls } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 import { Avatar } from "./Avatar"
 import { Final_bedroom } from "./Final_bedroom"
 import { Desktop } from "./Desktop";
@@ -12,12 +12,11 @@ export const Experience = () => {
             options: ["Typing", "Falling", "Standing", "Walking"]
         }
     });
-
+    
     return (
         <>
-            <OrbitControls />
             <Environment preset="sunset" />
-            <group position-y={-1}>
+            <group position-y={-1} rotation-y={90}>
                 <Final_bedroom />
                 <Avatar animation={animation}/>
                 <Desktop />
