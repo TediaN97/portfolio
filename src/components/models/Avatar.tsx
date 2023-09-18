@@ -35,10 +35,10 @@ type GLTFResult = GLTF & {
 }
 
 export function Avatar(props: JSX.IntrinsicElements['group'] & {
-    animation: string
+    animation: string, section: number  
   }) {
 
-  const { animation } = props;
+  const { animation } = props; 
   const groupRef = useRef<THREE.Group>(null);
   
   const { nodes, materials } = useGLTF('/models/64fae7c4a9fb106b21a99e71.glb') as GLTFResult

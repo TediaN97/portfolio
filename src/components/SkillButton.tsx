@@ -3,7 +3,7 @@ export const SkillButton = (props: {src: string, alt: string}) => {
     const { alt } = props;
 
     return (
-        <div className="flex items-center justify-center rounded-full bg-gray-50 shadow-xl mr-7 mt-10 hover:shadow-blue-400 p-5">
+        <div className="flex items-center justify-center rounded-full bg-gray-50 shadow-xl mr-7 mt-10 p-5">
             <img src={src} alt={alt} />
         </div>
     );

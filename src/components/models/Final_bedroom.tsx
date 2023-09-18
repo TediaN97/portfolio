@@ -7,7 +7,6 @@ import * as THREE from 'three'
 import { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
-import { useFrame } from '@react-three/fiber'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -35,23 +34,13 @@ type GLTFResult = GLTF & {
 export function Final_bedroom(props: JSX.IntrinsicElements['group']) {
   
   const groupRef = useRef<THREE.Group>(null);
-  
-  useFrame(() => {
-  });
-  
 
   const { nodes, materials } = useGLTF('/models/final_bedroom.glb') as GLTFResult
   return (
     <group {...props} ref={groupRef} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]} scale={0.010}>
-        <mesh name='Tv_stand' geometry={nodes.Object_10.geometry} material={materials.Tv_Stand} />
-        <mesh name='Wall' geometry={nodes.Object_2.geometry} material={materials.Wall} />
-        <mesh name='material' geometry={nodes.Object_3.geometry} material={materials.material} />
-        <mesh name='Bedside_Table' geometry={nodes.Object_4.geometry} material={materials.Bedside_Table} />
         <mesh name='Chair' geometry={nodes.Object_5.geometry} material={materials.Chair} scale={0.9} position={[0,15,1]}/>
         <mesh name='Desk' geometry={nodes.Object_7.geometry} material={materials.Desk} position={[-14,-9,0]}/>
-        <mesh name='material_5' geometry={nodes.Object_8.geometry} material={materials.material_5} />
-        <mesh name='Lamp_Stand' geometry={nodes.Object_9.geometry} material={materials.Lamp_Stand} />
       </group>
     </group>
   )
