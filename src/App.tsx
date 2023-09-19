@@ -12,12 +12,19 @@ import { Preloader } from './components/Preloader';
 
 function App() {
 
-  const [ section, setSection] = useState(0);
-  const [ menuOpened, setMenuOpened ] = useState(false);
+    const [ section, setSection] = useState(0);
+    const [ menuOpened, setMenuOpened ] = useState(false);
+    const [ loading, setLoading ] = useState(false);
 
+    const $follower = useRef<HTMLDivElement>(null)
 
-  const $follower = useRef<HTMLDivElement>(null)
-
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 8000)
+    }, []);
+    
     useEffect(() => {
         const ctx = gsap.context(() => {
             const xTo = gsap.quickTo($follower.current, "x", {
@@ -45,39 +52,44 @@ function App() {
         return () => {
             ctx.revert()
         }
-    }, [])
+    }, [loading]);
 
   return (
-        <div className='bg-yellow-500 font-body'>   
-            <Preloader />     
-            <div
-            ref={$follower}
-            className="pointer-events-none fixed left-0 top-0 aspect-square w-[50vmin] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full will-change-transform"
-            >
-                <div className="h-full w-full animate-spin-slow bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% opacity-70"></div>
-            </div>
-            <div className="relative grid h-screen w-full place-items-center">
-                <div className="absolute inset-0 backdrop-blur-3xl"></div>
-                    <MotionConfig 
-                        transition={{
-                            ...framerMotionConfig,
-                            
-                        }}
+        <div className='bg-gradient-to-r from-yellow-500 to-orange-500 font-body'>
+            { loading 
+                ? 
+                    <Preloader /> 
+                :
+            <div>
+                <div ref={$follower}
+                    className="pointer-events-none fixed left-0 top-0 aspect-square w-[50vmin] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full will-change-transform"
                     >
-                        <Canvas className='' shadows camera={{ position: [0, 1, 4], fov: 30 }}>
-                            <ScrollControls pages={4} damping={0.1}>
-                                <ScrollManager section={section} onSectionChange={setSection} />
-                                <Scroll>
-                                    <Experience section={section} menuOpened={menuOpened} />
-                                </Scroll>
-                                <Scroll html>
-                                    <Interface />
-                                </Scroll> 
-                            </ScrollControls>
-                        </Canvas>
-                        <Menu onSectionChange={ setSection } menuOpened={menuOpened} setMenuOpened={setMenuOpened} />
-                    </MotionConfig>
+                        <div className="h-full w-full animate-spin-slow bg-white opacity-40"></div>
+                </div>
+                    <div className="relative grid h-screen w-full place-items-center">
+                        <div className="absolute inset-0 backdrop-blur-3xl"></div>
+                            <MotionConfig 
+                                transition={{
+                                    ...framerMotionConfig,
+                                    
+                                }}
+                            >
+                            <Canvas className='' shadows camera={{ position: [0, 1, 4], fov: 30 }}>
+                                <ScrollControls pages={4} damping={0.1}>
+                                    <ScrollManager section={section} onSectionChange={setSection} />
+                                    <Scroll>
+                                        <Experience section={section} menuOpened={menuOpened} />
+                                    </Scroll>
+                                    <Scroll html>
+                                        <Interface onSectionChange={setSection} menuOpened={menuOpened} />
+                                    </Scroll> 
+                                </ScrollControls>
+                            </Canvas>
+                            <Menu onSectionChange={ setSection } menuOpened={menuOpened} setMenuOpened={setMenuOpened} />
+                        </MotionConfig>
+                </div>
             </div>
+            }
         </div>
   )
 }
